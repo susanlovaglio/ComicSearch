@@ -1,0 +1,574 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3D164E481DC6DA1100937D2B /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D164E471DC6DA1100937D2B /* Character.swift */; };
+		3D164E4A1DC6E83900937D2B /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D164E491DC6E83900937D2B /* Secrets.swift */; };
+		3D164E4C1DC6E89100937D2B /* ComicVineAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D164E4B1DC6E89100937D2B /* ComicVineAPIClient.swift */; };
+		3D164E4E1DC6E91900937D2B /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D164E4D1DC6E91900937D2B /* DataStore.swift */; };
+		3D164E501DC6EC6500937D2B /* ComicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D164E4F1DC6EC6500937D2B /* ComicTableViewController.swift */; };
+		3D5154911DC6D1EB00C00F2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5154901DC6D1EB00C00F2E /* AppDelegate.swift */; };
+		3D5154931DC6D1EB00C00F2E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5154921DC6D1EB00C00F2E /* ViewController.swift */; };
+		3D5154961DC6D1EB00C00F2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D5154941DC6D1EB00C00F2E /* Main.storyboard */; };
+		3D5154991DC6D1EB00C00F2E /* ComicCon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D5154971DC6D1EB00C00F2E /* ComicCon.xcdatamodeld */; };
+		3D51549B1DC6D1EB00C00F2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D51549A1DC6D1EB00C00F2E /* Assets.xcassets */; };
+		3D51549E1DC6D1EB00C00F2E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D51549C1DC6D1EB00C00F2E /* LaunchScreen.storyboard */; };
+		3D5154A91DC6D1EB00C00F2E /* ComicConTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5154A81DC6D1EB00C00F2E /* ComicConTests.swift */; };
+		3D5154B41DC6D1EB00C00F2E /* ComicConUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5154B31DC6D1EB00C00F2E /* ComicConUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3D5154A51DC6D1EB00C00F2E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3D5154851DC6D1EB00C00F2E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D51548C1DC6D1EB00C00F2E;
+			remoteInfo = ComicCon;
+		};
+		3D5154B01DC6D1EB00C00F2E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3D5154851DC6D1EB00C00F2E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D51548C1DC6D1EB00C00F2E;
+			remoteInfo = ComicCon;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3D164E471DC6DA1100937D2B /* Character.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		3D164E491DC6E83900937D2B /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		3D164E4B1DC6E89100937D2B /* ComicVineAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComicVineAPIClient.swift; sourceTree = "<group>"; };
+		3D164E4D1DC6E91900937D2B /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		3D164E4F1DC6EC6500937D2B /* ComicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComicTableViewController.swift; sourceTree = "<group>"; };
+		3D51548D1DC6D1EB00C00F2E /* ComicCon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComicCon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D5154901DC6D1EB00C00F2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3D5154921DC6D1EB00C00F2E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3D5154951DC6D1EB00C00F2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3D5154981DC6D1EB00C00F2E /* ComicCon.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ComicCon.xcdatamodel; sourceTree = "<group>"; };
+		3D51549A1DC6D1EB00C00F2E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3D51549D1DC6D1EB00C00F2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3D51549F1DC6D1EB00C00F2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D5154A41DC6D1EB00C00F2E /* ComicConTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComicConTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D5154A81DC6D1EB00C00F2E /* ComicConTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicConTests.swift; sourceTree = "<group>"; };
+		3D5154AA1DC6D1EB00C00F2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D5154AF1DC6D1EB00C00F2E /* ComicConUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComicConUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D5154B31DC6D1EB00C00F2E /* ComicConUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicConUITests.swift; sourceTree = "<group>"; };
+		3D5154B51DC6D1EB00C00F2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3D51548A1DC6D1EB00C00F2E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D5154A11DC6D1EB00C00F2E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D5154AC1DC6D1EB00C00F2E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3D5154841DC6D1EB00C00F2E = {
+			isa = PBXGroup;
+			children = (
+				3D51548F1DC6D1EB00C00F2E /* ComicCon */,
+				3D5154A71DC6D1EB00C00F2E /* ComicConTests */,
+				3D5154B21DC6D1EB00C00F2E /* ComicConUITests */,
+				3D51548E1DC6D1EB00C00F2E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3D51548E1DC6D1EB00C00F2E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3D51548D1DC6D1EB00C00F2E /* ComicCon.app */,
+				3D5154A41DC6D1EB00C00F2E /* ComicConTests.xctest */,
+				3D5154AF1DC6D1EB00C00F2E /* ComicConUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3D51548F1DC6D1EB00C00F2E /* ComicCon */ = {
+			isa = PBXGroup;
+			children = (
+				3D5154901DC6D1EB00C00F2E /* AppDelegate.swift */,
+				3D164E471DC6DA1100937D2B /* Character.swift */,
+				3D164E4B1DC6E89100937D2B /* ComicVineAPIClient.swift */,
+				3D164E4D1DC6E91900937D2B /* DataStore.swift */,
+				3D164E491DC6E83900937D2B /* Secrets.swift */,
+				3D5154921DC6D1EB00C00F2E /* ViewController.swift */,
+				3D164E4F1DC6EC6500937D2B /* ComicTableViewController.swift */,
+				3D5154941DC6D1EB00C00F2E /* Main.storyboard */,
+				3D51549A1DC6D1EB00C00F2E /* Assets.xcassets */,
+				3D51549C1DC6D1EB00C00F2E /* LaunchScreen.storyboard */,
+				3D51549F1DC6D1EB00C00F2E /* Info.plist */,
+				3D5154971DC6D1EB00C00F2E /* ComicCon.xcdatamodeld */,
+			);
+			path = ComicCon;
+			sourceTree = "<group>";
+		};
+		3D5154A71DC6D1EB00C00F2E /* ComicConTests */ = {
+			isa = PBXGroup;
+			children = (
+				3D5154A81DC6D1EB00C00F2E /* ComicConTests.swift */,
+				3D5154AA1DC6D1EB00C00F2E /* Info.plist */,
+			);
+			path = ComicConTests;
+			sourceTree = "<group>";
+		};
+		3D5154B21DC6D1EB00C00F2E /* ComicConUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3D5154B31DC6D1EB00C00F2E /* ComicConUITests.swift */,
+				3D5154B51DC6D1EB00C00F2E /* Info.plist */,
+			);
+			path = ComicConUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3D51548C1DC6D1EB00C00F2E /* ComicCon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D5154B81DC6D1EB00C00F2E /* Build configuration list for PBXNativeTarget "ComicCon" */;
+			buildPhases = (
+				3D5154891DC6D1EB00C00F2E /* Sources */,
+				3D51548A1DC6D1EB00C00F2E /* Frameworks */,
+				3D51548B1DC6D1EB00C00F2E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ComicCon;
+			productName = ComicCon;
+			productReference = 3D51548D1DC6D1EB00C00F2E /* ComicCon.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3D5154A31DC6D1EB00C00F2E /* ComicConTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D5154BB1DC6D1EB00C00F2E /* Build configuration list for PBXNativeTarget "ComicConTests" */;
+			buildPhases = (
+				3D5154A01DC6D1EB00C00F2E /* Sources */,
+				3D5154A11DC6D1EB00C00F2E /* Frameworks */,
+				3D5154A21DC6D1EB00C00F2E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3D5154A61DC6D1EB00C00F2E /* PBXTargetDependency */,
+			);
+			name = ComicConTests;
+			productName = ComicConTests;
+			productReference = 3D5154A41DC6D1EB00C00F2E /* ComicConTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		3D5154AE1DC6D1EB00C00F2E /* ComicConUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D5154BE1DC6D1EB00C00F2E /* Build configuration list for PBXNativeTarget "ComicConUITests" */;
+			buildPhases = (
+				3D5154AB1DC6D1EB00C00F2E /* Sources */,
+				3D5154AC1DC6D1EB00C00F2E /* Frameworks */,
+				3D5154AD1DC6D1EB00C00F2E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3D5154B11DC6D1EB00C00F2E /* PBXTargetDependency */,
+			);
+			name = ComicConUITests;
+			productName = ComicConUITests;
+			productReference = 3D5154AF1DC6D1EB00C00F2E /* ComicConUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3D5154851DC6D1EB00C00F2E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "Flatiron School";
+				TargetAttributes = {
+					3D51548C1DC6D1EB00C00F2E = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Manual;
+					};
+					3D5154A31DC6D1EB00C00F2E = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = KXY9EDFTF5;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 3D51548C1DC6D1EB00C00F2E;
+					};
+					3D5154AE1DC6D1EB00C00F2E = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = KXY9EDFTF5;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 3D51548C1DC6D1EB00C00F2E;
+					};
+				};
+			};
+			buildConfigurationList = 3D5154881DC6D1EB00C00F2E /* Build configuration list for PBXProject "ComicCon" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3D5154841DC6D1EB00C00F2E;
+			productRefGroup = 3D51548E1DC6D1EB00C00F2E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3D51548C1DC6D1EB00C00F2E /* ComicCon */,
+				3D5154A31DC6D1EB00C00F2E /* ComicConTests */,
+				3D5154AE1DC6D1EB00C00F2E /* ComicConUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3D51548B1DC6D1EB00C00F2E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D51549E1DC6D1EB00C00F2E /* LaunchScreen.storyboard in Resources */,
+				3D51549B1DC6D1EB00C00F2E /* Assets.xcassets in Resources */,
+				3D5154961DC6D1EB00C00F2E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D5154A21DC6D1EB00C00F2E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D5154AD1DC6D1EB00C00F2E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3D5154891DC6D1EB00C00F2E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D164E4E1DC6E91900937D2B /* DataStore.swift in Sources */,
+				3D5154991DC6D1EB00C00F2E /* ComicCon.xcdatamodeld in Sources */,
+				3D164E4A1DC6E83900937D2B /* Secrets.swift in Sources */,
+				3D164E501DC6EC6500937D2B /* ComicTableViewController.swift in Sources */,
+				3D5154931DC6D1EB00C00F2E /* ViewController.swift in Sources */,
+				3D164E4C1DC6E89100937D2B /* ComicVineAPIClient.swift in Sources */,
+				3D5154911DC6D1EB00C00F2E /* AppDelegate.swift in Sources */,
+				3D164E481DC6DA1100937D2B /* Character.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D5154A01DC6D1EB00C00F2E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D5154A91DC6D1EB00C00F2E /* ComicConTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D5154AB1DC6D1EB00C00F2E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D5154B41DC6D1EB00C00F2E /* ComicConUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3D5154A61DC6D1EB00C00F2E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3D51548C1DC6D1EB00C00F2E /* ComicCon */;
+			targetProxy = 3D5154A51DC6D1EB00C00F2E /* PBXContainerItemProxy */;
+		};
+		3D5154B11DC6D1EB00C00F2E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3D51548C1DC6D1EB00C00F2E /* ComicCon */;
+			targetProxy = 3D5154B01DC6D1EB00C00F2E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3D5154941DC6D1EB00C00F2E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3D5154951DC6D1EB00C00F2E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3D51549C1DC6D1EB00C00F2E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3D51549D1DC6D1EB00C00F2E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3D5154B61DC6D1EB00C00F2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3D5154B71DC6D1EB00C00F2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3D5154B91DC6D1EB00C00F2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = ComicCon/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.FlatironSchool.ComicCon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		3D5154BA1DC6D1EB00C00F2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = ComicCon/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.FlatironSchool.ComicCon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		3D5154BC1DC6D1EB00C00F2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = KXY9EDFTF5;
+				INFOPLIST_FILE = ComicConTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.FlatironSchool.ComicConTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ComicCon.app/ComicCon";
+			};
+			name = Debug;
+		};
+		3D5154BD1DC6D1EB00C00F2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = KXY9EDFTF5;
+				INFOPLIST_FILE = ComicConTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.FlatironSchool.ComicConTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ComicCon.app/ComicCon";
+			};
+			name = Release;
+		};
+		3D5154BF1DC6D1EB00C00F2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = KXY9EDFTF5;
+				INFOPLIST_FILE = ComicConUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.FlatironSchool.ComicConUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = ComicCon;
+			};
+			name = Debug;
+		};
+		3D5154C01DC6D1EB00C00F2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = KXY9EDFTF5;
+				INFOPLIST_FILE = ComicConUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.FlatironSchool.ComicConUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = ComicCon;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3D5154881DC6D1EB00C00F2E /* Build configuration list for PBXProject "ComicCon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D5154B61DC6D1EB00C00F2E /* Debug */,
+				3D5154B71DC6D1EB00C00F2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3D5154B81DC6D1EB00C00F2E /* Build configuration list for PBXNativeTarget "ComicCon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D5154B91DC6D1EB00C00F2E /* Debug */,
+				3D5154BA1DC6D1EB00C00F2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3D5154BB1DC6D1EB00C00F2E /* Build configuration list for PBXNativeTarget "ComicConTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D5154BC1DC6D1EB00C00F2E /* Debug */,
+				3D5154BD1DC6D1EB00C00F2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3D5154BE1DC6D1EB00C00F2E /* Build configuration list for PBXNativeTarget "ComicConUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D5154BF1DC6D1EB00C00F2E /* Debug */,
+				3D5154C01DC6D1EB00C00F2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3D5154971DC6D1EB00C00F2E /* ComicCon.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3D5154981DC6D1EB00C00F2E /* ComicCon.xcdatamodel */,
+			);
+			currentVersion = 3D5154981DC6D1EB00C00F2E /* ComicCon.xcdatamodel */;
+			path = ComicCon.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 3D5154851DC6D1EB00C00F2E /* Project object */;
+}
