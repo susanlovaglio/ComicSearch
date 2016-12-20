@@ -11,39 +11,31 @@ import UIKit
 class ComicTableViewController: UITableViewController {
     
     let store = DataStore.sharedInstance
+    var loadingStatus = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         store.getCharacters { (success) in
             if success{
+                self.loadingStatus = false
                 OperationQueue.main.addOperation({
                     self.tableView.reloadData()
-                    
                 })
             }
         }
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return store.characters.count
     }
     
@@ -56,6 +48,40 @@ class ComicTableViewController: UITableViewController {
         
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        cell.textLabel?.text = nil
+        cell.imageView?.image = nil
+        
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == store.characters.count - 5 && self.loadingStatus == false{
+            self.loadingStatus = true
+            store.getCharacters { (success) in
+                if success{
+                    OperationQueue.main.addOperation({
+                        self.tableView.reloadData()
+                    })
+                    self.loadingStatus = false
+                }
+            }
+        }
+    }
+    
+    //    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    //        //        print("###### scroll ended #####")
+    //        //        print(#function)
+    //         }
+    ////    }
+    //    //
+    
+    //    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    
+    //    }
     
     
     /*

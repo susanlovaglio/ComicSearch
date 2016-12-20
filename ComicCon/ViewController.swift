@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var image: UIImageView!
     
     let numberOfHeroImages = 8
@@ -21,31 +21,19 @@ class ViewController: UIViewController {
         setUpImageViewAnimation()
         self.image.layer.cornerRadius = 0.25 * self.image.bounds.size.width
         self.image.clipsToBounds = true
-
         
-        // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
     }
-
-
 }
 
 extension ViewController {
-    
-//    private func configureButton()
-//    {
-//        self.image.layer.cornerRadius = 0.5 * self.image.bounds.size.width
-//        self.image.clipsToBounds = true
-//    }
     
     func setUpImageViewAnimation() {
         
