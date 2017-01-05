@@ -20,6 +20,8 @@
 		3D51549E1DC6D1EB00C00F2E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D51549C1DC6D1EB00C00F2E /* LaunchScreen.storyboard */; };
 		3D5154A91DC6D1EB00C00F2E /* ComicConTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5154A81DC6D1EB00C00F2E /* ComicConTests.swift */; };
 		3D5154B41DC6D1EB00C00F2E /* ComicConUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5154B31DC6D1EB00C00F2E /* ComicConUITests.swift */; };
+		3DFB08541E0CA16A005C5B8D /* ComicDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB08531E0CA16A005C5B8D /* ComicDisplayViewController.swift */; };
+		3DFB08561E0CA1E6005C5B8D /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB08551E0CA1E6005C5B8D /* CharacterCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		3D5154AF1DC6D1EB00C00F2E /* ComicConUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComicConUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D5154B31DC6D1EB00C00F2E /* ComicConUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicConUITests.swift; sourceTree = "<group>"; };
 		3D5154B51DC6D1EB00C00F2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DFB08531E0CA16A005C5B8D /* ComicDisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComicDisplayViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
+		3DFB08551E0CA1E6005C5B8D /* CharacterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,8 @@
 				3D164E491DC6E83900937D2B /* Secrets.swift */,
 				3D5154921DC6D1EB00C00F2E /* ViewController.swift */,
 				3D164E4F1DC6EC6500937D2B /* ComicTableViewController.swift */,
+				3DFB08531E0CA16A005C5B8D /* ComicDisplayViewController.swift */,
+				3DFB08551E0CA1E6005C5B8D /* CharacterCell.swift */,
 				3D5154941DC6D1EB00C00F2E /* Main.storyboard */,
 				3D51549A1DC6D1EB00C00F2E /* Assets.xcassets */,
 				3D51549C1DC6D1EB00C00F2E /* LaunchScreen.storyboard */,
@@ -211,7 +217,8 @@
 				TargetAttributes = {
 					3D51548C1DC6D1EB00C00F2E = {
 						CreatedOnToolsVersion = 8.1;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = CHJT78XY84;
+						ProvisioningStyle = Automatic;
 					};
 					3D5154A31DC6D1EB00C00F2E = {
 						CreatedOnToolsVersion = 8.1;
@@ -282,6 +289,8 @@
 				3D164E4E1DC6E91900937D2B /* DataStore.swift in Sources */,
 				3D5154991DC6D1EB00C00F2E /* ComicCon.xcdatamodeld in Sources */,
 				3D164E4A1DC6E83900937D2B /* Secrets.swift in Sources */,
+				3DFB08561E0CA1E6005C5B8D /* CharacterCell.swift in Sources */,
+				3DFB08541E0CA16A005C5B8D /* ComicDisplayViewController.swift in Sources */,
 				3D164E501DC6EC6500937D2B /* ComicTableViewController.swift in Sources */,
 				3D5154931DC6D1EB00C00F2E /* ViewController.swift in Sources */,
 				3D164E4C1DC6E89100937D2B /* ComicVineAPIClient.swift in Sources */,
@@ -436,10 +445,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = CHJT78XY84;
 				INFOPLIST_FILE = ComicCon/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.FlatironSchool.ComicCon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SusanLovaglio.ComicCon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -449,10 +460,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = CHJT78XY84;
 				INFOPLIST_FILE = ComicCon/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.FlatironSchool.ComicCon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SusanLovaglio.ComicCon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

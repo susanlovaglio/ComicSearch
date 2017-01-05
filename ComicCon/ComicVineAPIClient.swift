@@ -14,7 +14,7 @@ class ComicVineAPIClient{
         
         if let offsetunwrapped = offset{
             
-        let stringUrl = "http://comicvine.com/api/characters/?api_key=\(Secrets.key)&format=json&limit=10&offset=\(offsetunwrapped)&field_list=name,image"
+        let stringUrl = "http://comicvine.com/api/characters/?api_key=\(Secrets.key)&format=json&limit=14&offset=\(offsetunwrapped)&field_list=name,image"
         let url = URL(string: stringUrl)
         let session = URLSession.shared
 //            print("offset: \(offsetunwrapped)")
@@ -41,7 +41,7 @@ class ComicVineAPIClient{
         task.resume()
         }else{
                 
-                let stringUrl = "http://comicvine.com/api/characters/?api_key=\(Secrets.key)&format=json&limit=10&field_list=name,image"
+                let stringUrl = "http://comicvine.com/api/characters/?api_key=\(Secrets.key)&format=json&limit=14&field_list=name,image"
                 let url = URL(string: stringUrl)
                 let session = URLSession.shared
                 

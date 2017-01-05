@@ -31,53 +31,56 @@ class DataStore{
                 
                 guard let name = each["name"] as? String else{break}
                 
-                if let unwrappedImages = each["image"] as? [String: Any]{
-                    if let iconImage = unwrappedImages["icon_url"] as? String{
-                        if let iconUrl = URL(string: iconImage){
-                            
-                            do{
-                                let imagedata = try Data.init(contentsOf: iconUrl)
-                                let image = UIImage.init(data: imagedata)
-                                let character = Character.init(name: name, image: image)
-                                self.characters.append(character)
-                                                                completion(true)
-                                
-                                //                                }
-                                print("name: \(character.name)")
-                                //                                print("count: \(self.characters.count)")
-                                //
-                            }catch{
-                                let character = Character.init(name: name, image: nil)
-                                self.characters.append(character)
-                                print("image download error")
-                                                                completion(true)
-                                
-                            }
-                        }
-                        
-                    }
-                }
-//                completion(true)
+                guard let eachIcon = each["image"] as? [String : Any] else{
+                    let character = Character(name: name, image: nil)
+                    self.characters.append(character)
+                    completion(true)
+                    break}
+                
+                guard let link = eachIcon["icon_url"] as? String else{break}
+                
+                link.downloadedFromLink(completion: { (image) in
+                    let character = Character(name: name, image: image)
+                    self.characters.append(character)
+                    completion(true)
+                    
+                })
+            }
+            if let page = self.pageNumber{
+                //                print("IN if let page: \(self.pageNumber) \(self.offset) \(self.characters.count)")
+                self.pageNumber = page + 1
+                //                print("OUT if let page: \(self.pageNumber) \(self.offset) \(self.characters.count)")
+            }else{
+                //                print("IN else page: \(self.pageNumber) \(self.offset) \(self.characters.count)")
+                self.pageNumber = 1
+                //                print("OUT else page: \(self.pageNumber) \(self.offset) \(self.characters.count)")
                 
             }
-            
             
             //            print("coming out: \(self.offset), \(self.pageNumber), \(self.characters.count)")
             
         })
-        if let page = self.pageNumber{
-            //                print("IN if let page: \(self.pageNumber) \(self.offset) \(self.characters.count)")
-            self.pageNumber = page + 1
-            //                print("OUT if let page: \(self.pageNumber) \(self.offset) \(self.characters.count)")
-        }else{
-            //                print("IN else page: \(self.pageNumber) \(self.offset) \(self.characters.count)")
-            self.pageNumber = 1
-            //                print("OUT else page: \(self.pageNumber) \(self.offset) \(self.characters.count)")
-            
-        }
-        
-        //        completion(true)
     }
     
     
+}
+
+extension String {
+    
+    func downloadedFromLink(completion: @escaping (UIImage) -> Void){
+        
+        guard let url = URL(string: self) else { return }
+
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let result = UIImage(data: data)
+                else { return }
+            DispatchQueue.main.async() { () -> Void in
+                completion(result)
+            }
+            }.resume()
+    }
 }
