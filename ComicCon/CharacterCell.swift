@@ -17,14 +17,16 @@ class CharacterCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        characterImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height*2/3))
+        characterImageView = UIImageView(frame: CGRect(x: 0, y: 10, width: frame.size.width, height: frame.size.height*2/3))
         characterImageView.contentMode = UIViewContentMode.scaleAspectFit
         contentView.addSubview(characterImageView)
         
         characterNameLabel = UILabel(frame: CGRect(x: 0, y: characterImageView.frame.size.height, width: frame.size.width, height: frame.size.height/3))
         characterNameLabel.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+//        characterNameLabel.textColor = UIColor.white
         characterNameLabel.textAlignment = .center
         contentView.addSubview(characterNameLabel)
+        
     }
     
     func setCharacter(character: Character) {

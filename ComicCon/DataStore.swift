@@ -13,22 +13,25 @@ class DataStore{
     
     static let sharedInstance = DataStore()
     var characters = [Character]()
+    var fillingStore = false
+    
     var pageNumber:Int?
-    var offset: Int?{
+    
+    var offset: Int{
         if let number = pageNumber{
-            return number * 10
+            return number * 14
+            //number must match limit number in url
         }
-        return nil
+        return 0
     }
     
     func getCharacters(with completion: @escaping (Bool) -> ()){
         
-        //        print("going into chars: \(offset), \(pageNumber), \(characters.count)")
-        
+        if fillingStore == false{
+            self.fillingStore = true
+
         ComicVineAPIClient.getCharactersFromAPI(offset: self.offset, with: { (dictionaries) in
-            
             for each in dictionaries{
-                
                 guard let name = each["name"] as? String else{break}
                 
                 guard let eachIcon = each["image"] as? [String : Any] else{
@@ -39,35 +42,61 @@ class DataStore{
                 
                 guard let link = eachIcon["icon_url"] as? String else{break}
                 
-                link.downloadedFromLink(completion: { (image) in
+                link.downloadedFromURLString(completion: { (image) in
                     let character = Character(name: name, image: image)
                     self.characters.append(character)
                     completion(true)
                     
                 })
-            }
-            if let page = self.pageNumber{
-                //                print("IN if let page: \(self.pageNumber) \(self.offset) \(self.characters.count)")
-                self.pageNumber = page + 1
-                //                print("OUT if let page: \(self.pageNumber) \(self.offset) \(self.characters.count)")
-            }else{
-                //                print("IN else page: \(self.pageNumber) \(self.offset) \(self.characters.count)")
-                self.pageNumber = 1
-                //                print("OUT else page: \(self.pageNumber) \(self.offset) \(self.characters.count)")
                 
             }
-            
-            //            print("coming out: \(self.offset), \(self.pageNumber), \(self.characters.count)")
-            
-        })
+            if let page = self.pageNumber{
+                self.pageNumber = page + 1
+            }else{
+                self.pageNumber = 1
+            }
+            self.fillingStore = false
+        })}
     }
     
+    func getCharacters(with query: String, with completion: @escaping (Bool) -> ()){
+        
+        if fillingStore == false{
+            self.fillingStore = true
+            
+            ComicVineAPIClient.getCharacters(with: query, offset: self.offset, with: { (dictionaries) in
+                for each in dictionaries{
+                    guard let name = each["name"] as? String else{break}
+                    guard let eachIcon = each["image"] as? [String : Any] else{
+                        let character = Character(name: name, image: nil)
+                        self.characters.append(character)
+                        completion(true)
+                        break}
+                    
+                    guard let link = eachIcon["icon_url"] as? String else{break}
+                    
+                    link.downloadedFromURLString(completion: { (image) in
+                        let character = Character(name: name, image: image)
+                        self.characters.append(character)
+                        completion(true)
+                        
+                    })
+                    
+                }
+                if let page = self.pageNumber{
+                    self.pageNumber = page + 1
+                }else{
+                    self.pageNumber = 1
+                }
+                self.fillingStore = false
+            })}
+    }
     
 }
 
 extension String {
     
-    func downloadedFromLink(completion: @escaping (UIImage) -> Void){
+    func downloadedFromURLString(completion: @escaping (UIImage) -> Void){
         
         guard let url = URL(string: self) else { return }
 
