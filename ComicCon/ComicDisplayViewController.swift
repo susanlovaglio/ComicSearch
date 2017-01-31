@@ -47,6 +47,7 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     
     func addImage(){
         
+        
         let image =  UIImage(named: "powPic")
         imageView = UIImageView(image: image)
         imageView.contentMode = UIViewContentMode.scaleAspectFit
@@ -147,6 +148,7 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         store.characters.removeAll()
+        self.comicCollectionView.reloadData()
         store.pageNumber = nil
         
         store.getCharacters(with: searchText) { (success) in
