@@ -10,11 +10,12 @@ import UIKit
 
 class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
+    var counter = 0
     var comicCollectionView: UICollectionView!
     let store = DataStore.sharedInstance
     var imageView = UIImageView()
     var searchBar = UISearchBar()
-    
+    var searchActive = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,11 +30,10 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
                 })
             }
         }
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        print("count: \(store.characters.count)")
         return store.characters.count
     }
     
@@ -41,8 +41,12 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         
         let cell: CharacterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "comicCell", for: indexPath) as! CharacterCell
         
-        cell.setCharacter(character: store.characters[indexPath.item])
+//        print("count in cell: \(store.characters.count)")
+//        print("indexpath.item: \(indexPath.item)")
 
+        
+        cell.setCharacter(character: store.characters[indexPath.item])
+        
         return cell
     }
     
@@ -109,17 +113,19 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+//        counter = counter + 1
+//        print(#function, counter)
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
         if offsetY > contentHeight - scrollView.frame.size.height {
             
+//            print("offset condition true")
             
             if searchBar.text!.isEmpty {
-             
+
                 store.getCharacters { (success) in
-                    
+
                     if success{
                         OperationQueue.main.addOperation( {
                             
@@ -128,10 +134,10 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
                     }
                 }
             }else {
-                
+//                print("search bar is full")
                 let query = searchBar.text!
                 
-                store.getCharacters(with: query, with: { (success) in
+                store.getAdditionalCharacters(with: query, with: { (success) in
                     
                     if success{
                         
@@ -146,29 +152,23 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         }
     }
     
-    //    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-    //
-    //        let characterCell = cell as! CharacterCell
-    //        characterCell.characterNameLabel.text = nil
-    //        characterCell.characterImageView.image = nil
-    //    }
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        print(#function, searchText)
         store.characters.removeAll()
-        store.pageNumber = nil
-        
+        //        store.pageNumber = nil
         store.getCharacters(with: searchText) { (success) in
             
             OperationQueue.main.addOperation {
+                
                 self.comicCollectionView.reloadData()
             }
         }
+        
     }
     
-    //    override var prefersStatusBarHidden: Bool {
-    //        return true
-    //    }
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
     /*
      // MARK: - Navigation
