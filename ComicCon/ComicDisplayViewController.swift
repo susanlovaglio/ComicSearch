@@ -33,17 +33,12 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        print("count: \(store.characters.count)")
         return store.characters.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell: CharacterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "comicCell", for: indexPath) as! CharacterCell
-        
-//        print("count in cell: \(store.characters.count)")
-//        print("indexpath.item: \(indexPath.item)")
-
         
         cell.setCharacter(character: store.characters[indexPath.item])
         
@@ -113,19 +108,16 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        counter = counter + 1
-//        print(#function, counter)
+
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
         if offsetY > contentHeight - scrollView.frame.size.height {
             
-//            print("offset condition true")
-            
             if searchBar.text!.isEmpty {
-
+                
                 store.getCharacters { (success) in
-
+                    
                     if success{
                         OperationQueue.main.addOperation( {
                             
@@ -134,7 +126,7 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
                     }
                 }
             }else {
-//                print("search bar is full")
+                //                print("search bar is full")
                 let query = searchBar.text!
                 
                 store.getAdditionalCharacters(with: query, with: { (success) in
@@ -153,11 +145,12 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(#function, searchText)
+        
         store.characters.removeAll()
-        //        store.pageNumber = nil
+        store.pageNumber = nil
+        
         store.getCharacters(with: searchText) { (success) in
-            
+//            print(searchText, success)
             OperationQueue.main.addOperation {
                 
                 self.comicCollectionView.reloadData()

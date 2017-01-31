@@ -41,8 +41,6 @@ class ComicVineAPIClient{
     
     class func getCharacters(with query: String, offset: Int, with completion: @escaping ([[String: Any]]) -> ()) -> URLSessionDataTask{
         
-//        print(query, offset)
-        
         let stringUrl = "http://comicvine.com/api/search/?api_key=\(Secrets.key)&format=json&field_list=name,image&limit=14&page=\(offset)&query=\(query)&resources=character"
         
         let url = URL(string: stringUrl)
@@ -53,15 +51,13 @@ class ComicVineAPIClient{
             do{
                 guard let unwrappedata = data else{return}
                 let results = try JSONSerialization.jsonObject(with: unwrappedata, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: Any]
-                if let results = results {
-                    
-                    let dictionaries = results["results"] as? [[String: Any]]
-                    
+                
+                if let unwrappedresults = results {
+
+                    let dictionaries = unwrappedresults["results"] as? [[String: Any]]
+
                     if let unwrappeddictionaries = dictionaries{
-//                        for each in unwrappeddictionaries{
-//                            print(each["name"] ?? "nothing")
-                            
-//                        }
+                        
                         completion(unwrappeddictionaries)
                     }
                 }

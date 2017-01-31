@@ -15,7 +15,7 @@ class DataStore{
     var characters = [Character]()
     var fillingStore = false
     var pageNumber:Int?
-    var task = URLSessionDataTask()
+    var task: URLSessionDataTask?
     
     var offset: Int {
         if let number = pageNumber{
@@ -30,7 +30,6 @@ class DataStore{
         let notFillingStore = fillingStore == false
         
         if notFillingStore{
-            //            print("*****************************starting to load")
             fillingStore = true
             ComicVineAPIClient.getCharactersFromAPI(offset: self.offset, with: { (dictionaries) in
                 for each in dictionaries{
@@ -59,11 +58,7 @@ class DataStore{
                     self.pageNumber = 1
                     self.fillingStore = false
                 }
-                
             })
-        }
-        else{
-            print("i'm busy right now")
         }
     }
     
@@ -73,13 +68,17 @@ class DataStore{
         let notFillingStore = fillingStore == false
         
         if notFillingStore {
+            if let task = task{
+                print("old task in if \(task)")
+                task.cancel()
+            }
+            self.characters.removeAll()
             fillingStore = true
             task = ComicVineAPIClient.getCharacters(with: query, offset: self.offset, with: { (dictionaries) in
                 
                 for each in dictionaries {
                     
                     guard let name = each["name"] as? String else {break}
-                    //                    print("name: \(name)")
                     
                     guard let eachIcon = each["image"] as? [String : Any] else {
                         let character = Character(name: name, image: nil)
@@ -108,30 +107,31 @@ class DataStore{
                     self.fillingStore = false
                 }
             })
+            print("new task in if: \(query) \(task)")
             
         }
         else {
-            task.cancel()
+            print("task cancelled: \(query) \(task)")
+            task!.cancel()
             pageNumber = nil
-            characters.removeAll()
-            //            print("I'm busy but will cancel")
+//            characters.removeAll()
+            
             task = ComicVineAPIClient.getCharacters(with: query, offset: self.offset, with: { (dictionaries) in
                 
                 for each in dictionaries {
-                    
                     guard let name = each["name"] as? String else {break}
                     
                     guard let eachIcon = each["image"] as? [String : Any] else {
                         let character = Character(name: name, image: nil)
                         self.characters.append(character)
                         completion(true)
-                        break}
+                        continue}
                     
                     guard let link = eachIcon["icon_url"] as? String else {
                         let character = Character(name: name, image: nil)
                         self.characters.append(character)
                         completion(true)
-                        break}
+                        continue}
                     
                     link.downloadedFromURLString(completion: { (image) in
                         let character = Character(name: name, image: image)
@@ -148,7 +148,8 @@ class DataStore{
                     self.fillingStore = false
                 }
             })
-            
+            print("new task in else: \(query) \(task)")
+        
         }
     }
     
@@ -157,7 +158,7 @@ class DataStore{
         let notFillingStore = fillingStore == false
         
         if notFillingStore {
-            print("*****************************starting to load")
+            
             fillingStore = true
             
             if let unwrappedPageNumber = self.pageNumber {
@@ -196,10 +197,6 @@ class DataStore{
                     }
                 })
             }
-        }
-        else {
-            
-            //            print("I'm busy")
         }
     }
 }
