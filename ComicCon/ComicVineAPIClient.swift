@@ -40,8 +40,10 @@ class ComicVineAPIClient{
     }
     
     class func getCharacters(with query: String, offset: Int, with completion: @escaping ([[String: Any]]) -> ()) -> URLSessionDataTask{
+
+        let preparedQuery = query.replacingOccurrences(of: " ", with: "")
         
-        let stringUrl = "http://comicvine.com/api/search/?api_key=\(Secrets.key)&format=json&field_list=name,image&limit=14&page=\(offset)&query=\(query)&resources=character"
+        let stringUrl = "http://comicvine.com/api/search/?api_key=\(Secrets.key)&format=json&field_list=name,image&limit=14&page=\(offset)&query=\(preparedQuery)&resources=character"
         
         let url = URL(string: stringUrl)
         let session = URLSession.shared
@@ -69,5 +71,6 @@ class ComicVineAPIClient{
         task.resume()
         return task
     }
+    
 }
 
