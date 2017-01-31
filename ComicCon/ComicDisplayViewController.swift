@@ -16,17 +16,21 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     var imageView = UIImageView()
     var searchBar = UISearchBar()
     var searchActive = false
+    var activityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.addImage()
         self.addSearchBar()
         self.setUpCollectionView()
+        self.setUpActivityIndicator()
         
         store.getCharacters { (success) in
             if success{
                 OperationQueue.main.addOperation( {
                     self.comicCollectionView.reloadData()
+                    self.activityIndicator.stopAnimating()
                 })
             }
         }
@@ -102,6 +106,19 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         self.comicCollectionView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
     }
     
+    func setUpActivityIndicator() {
+        
+        self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        self.view.addSubview(self.activityIndicator)
+        self.activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.activityIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        self.activityIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        self.activityIndicator.color = UIColor.black
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.startAnimating()
+    }
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
@@ -115,21 +132,22 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         
         if offsetY > contentHeight - scrollView.frame.size.height {
             
-            if searchBar.text!.isEmpty {
-                
+            if searchBar.text!.characters.count == 0 {
+                self.activityIndicator.startAnimating()
                 store.getCharacters { (success) in
                     
                     if success{
                         OperationQueue.main.addOperation( {
                             
                             self.comicCollectionView.reloadData()
+                            self.activityIndicator.stopAnimating()
                         })
                     }
                 }
             }else {
-                //                print("search bar is full")
+
                 let query = searchBar.text!
-                
+                self.activityIndicator.startAnimating()
                 store.getAdditionalCharacters(with: query, with: { (success) in
                     
                     if success{
@@ -137,6 +155,7 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
                         OperationQueue.main.addOperation {
                             
                             self.comicCollectionView.reloadData()
+                            self.activityIndicator.stopAnimating()
                         }
                     }
                     
@@ -150,12 +169,13 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         store.characters.removeAll()
         self.comicCollectionView.reloadData()
         store.pageNumber = nil
-        
+        self.activityIndicator.startAnimating()
         store.getCharacters(with: searchText) { (success) in
 //            print(searchText, success)
             OperationQueue.main.addOperation {
                 
                 self.comicCollectionView.reloadData()
+                self.activityIndicator.stopAnimating()
             }
         }
         
@@ -164,6 +184,8 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+
     
     
     /*

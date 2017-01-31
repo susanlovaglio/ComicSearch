@@ -19,14 +19,16 @@ class ComicVineAPIClient{
         
         let task = session.dataTask(with: url!) { (data, response, error) in
             
-            do{
+            do {
                 
-                let results = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: Any]
+                guard let unwrappedata = data else{return}
+
+                let results = try JSONSerialization.jsonObject(with: unwrappedata, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: Any]
                 if let results = results {
                     
                     let dictionaries = results["results"] as? [[String: Any]]
                     
-                    if let unwrappeddictionaries = dictionaries{
+                    if let unwrappeddictionaries = dictionaries {
                         
                         completion(unwrappeddictionaries)
                     }
@@ -39,7 +41,7 @@ class ComicVineAPIClient{
         task.resume()
     }
     
-    class func getCharacters(with query: String, offset: Int, with completion: @escaping ([[String: Any]]) -> ()) -> URLSessionDataTask{
+    class func getCharacters(with query: String, offset: Int, with completion: @escaping ([[String: Any]]) -> ()) -> URLSessionDataTask {
 
         let preparedQuery = query.replacingOccurrences(of: " ", with: "")
         
@@ -50,15 +52,16 @@ class ComicVineAPIClient{
         
         let task = session.dataTask(with: url!) { (data, response, error) in
             
-            do{
+            do {
                 guard let unwrappedata = data else{return}
+                
                 let results = try JSONSerialization.jsonObject(with: unwrappedata, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: Any]
                 
                 if let unwrappedresults = results {
 
                     let dictionaries = unwrappedresults["results"] as? [[String: Any]]
 
-                    if let unwrappeddictionaries = dictionaries{
+                    if let unwrappeddictionaries = dictionaries {
                         
                         completion(unwrappeddictionaries)
                     }

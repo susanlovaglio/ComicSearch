@@ -14,9 +14,8 @@ class DataStore{
     static let sharedInstance = DataStore()
     var characters = [Character]()
     var fillingStore = false
-    var pageNumber:Int?
     var task: URLSessionDataTask?
-    
+    var pageNumber:Int?
     var offset: Int {
         if let number = pageNumber{
             return number * 14
@@ -33,15 +32,20 @@ class DataStore{
             fillingStore = true
             ComicVineAPIClient.getCharactersFromAPI(offset: self.offset, with: { (dictionaries) in
                 for each in dictionaries{
+                    
                     guard let name = each["name"] as? String else {break}
                     
                     guard let eachIcon = each["image"] as? [String : Any] else{
                         let character = Character(name: name, image: nil)
                         self.characters.append(character)
                         completion(true)
-                        break}
+                        continue}
                     
-                    guard let link = eachIcon["icon_url"] as? String else {break}
+                    guard let link = eachIcon["icon_url"] as? String else {
+                        let character = Character(name: name, image: nil)
+                        self.characters.append(character)
+                        completion(true)
+                        continue}
                     
                     link.downloadedFromURLString(completion: { (image) in
                         let character = Character(name: name, image: image)
@@ -84,13 +88,13 @@ class DataStore{
                         let character = Character(name: name, image: nil)
                         self.characters.append(character)
                         completion(true)
-                        break}
+                        continue}
                     
                     guard let link = eachIcon["icon_url"] as? String else {
                         let character = Character(name: name, image: nil)
                         self.characters.append(character)
                         completion(true)
-                        break}
+                        continue}
                     
                     link.downloadedFromURLString(completion: { (image) in
                         let character = Character(name: name, image: image)
@@ -109,12 +113,10 @@ class DataStore{
             })
             print("new task in if: \(query) \(task)")
             
-        }
-        else {
+        } else {
             print("task cancelled: \(query) \(task)")
             task!.cancel()
             pageNumber = nil
-//            characters.removeAll()
             
             task = ComicVineAPIClient.getCharacters(with: query, offset: self.offset, with: { (dictionaries) in
                 
@@ -173,13 +175,13 @@ class DataStore{
                             let character = Character(name: name, image: nil)
                             self.characters.append(character)
                             completion(true)
-                            break}
+                            continue}
                         
                         guard let link = eachIcon["icon_url"] as? String else {
                             let character = Character(name: name, image: nil)
                             self.characters.append(character)
                             completion(true)
-                            break}
+                            continue}
                         
                         link.downloadedFromURLString(completion: { (image) in
                             let character = Character(name: name, image: image)
