@@ -45,7 +45,8 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         let cell: CharacterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "comicCell", for: indexPath) as! CharacterCell
         
         cell.setCharacter(character: store.characters[indexPath.item])
-        
+//        cell.backgroundColor = UIColor.green
+
         return cell
     }
     
@@ -82,14 +83,17 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func setUpCollectionView() {
-        
+
         let layout = UICollectionViewFlowLayout()
-        
-        layout.itemSize = CGSize(width: self.view.bounds.width * 0.45, height: self.view.bounds.height * 0.25)
-//        layout.footerReferenceSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height * 0.25)
-        
         self.comicCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         self.view.addSubview(self.comicCollectionView)
+
+        
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.itemSize = CGSize(width: self.view.frame.width / 2, height: self.view.frame.height * 0.25)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+
         self.comicCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         self.comicCollectionView.delegate = self
@@ -99,8 +103,7 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         self.comicCollectionView.register(CharacterCell.self, forCellWithReuseIdentifier: "comicCell")
         
         self.comicCollectionView.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor).isActive = true
-        self.comicCollectionView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 1.40).isActive = true
-        self.comicCollectionView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.95).isActive = true
+        self.comicCollectionView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
         self.comicCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         self.comicCollectionView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
     }

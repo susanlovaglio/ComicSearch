@@ -13,20 +13,33 @@ class CharacterCell: UICollectionViewCell {
     var characterImageView: UIImageView!
     var characterNameLabel: UILabel!
     var character: Character!
+    var borderView: UIView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        characterImageView = UIImageView(frame: CGRect(x: 0, y: 10, width: frame.size.width, height: frame.size.height*2/3))
+        characterImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         characterImageView.contentMode = UIViewContentMode.scaleAspectFit
         contentView.addSubview(characterImageView)
+        characterImageView.translatesAutoresizingMaskIntoConstraints = false
+        characterImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        characterImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        characterImageView.heightAnchor.constraint(equalToConstant: self.frame.size.height * 0.70).isActive = true
+        characterImageView.widthAnchor.constraint(equalToConstant: self.frame.size.width * 0.70).isActive = true
         
-        characterNameLabel = UILabel(frame: CGRect(x: 0, y: characterImageView.frame.size.height, width: frame.size.width, height: frame.size.height/3))
+        characterNameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         characterNameLabel.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-//        characterNameLabel.textColor = UIColor.white
         characterNameLabel.textAlignment = .center
         contentView.addSubview(characterNameLabel)
+        characterNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        characterNameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        characterNameLabel.topAnchor.constraint(equalTo: characterImageView.bottomAnchor).isActive = true
+        characterNameLabel.heightAnchor.constraint(equalToConstant: self.frame.height * 0.15).isActive = true
+        characterNameLabel.widthAnchor.constraint(equalToConstant: self.frame.width).isActive = true
         
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.borderWidth = 1.0
+
     }
     
     func setCharacter(character: Character) {
