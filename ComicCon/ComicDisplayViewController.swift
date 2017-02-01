@@ -63,7 +63,6 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         imageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: self.view.frame.size.height * 0.25).isActive = true
-        //        imageView.bottomAnchor.constraint(equalTo: self.searchBar.topAnchor).isActive = true
     }
     
     func addSearchBar(){
@@ -87,9 +86,9 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         let layout = UICollectionViewFlowLayout()
         
         layout.itemSize = CGSize(width: self.view.bounds.width * 0.45, height: self.view.bounds.height * 0.25)
+//        layout.footerReferenceSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height * 0.25)
         
         self.comicCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        
         self.view.addSubview(self.comicCollectionView)
         self.comicCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -108,17 +107,22 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     
     func setUpActivityIndicator() {
         
-        self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
+        
         self.view.addSubview(self.activityIndicator)
         self.activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        self.activityIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        self.activityIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        self.activityIndicator.leadingAnchor.constraint(equalTo:self.view.leadingAnchor ).isActive = true
+        self.activityIndicator.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        self.activityIndicator.heightAnchor.constraint(equalToConstant: self.view.frame.height * 0.06).isActive = true
+        self.activityIndicator.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.topAnchor).isActive = true
+
+        self.activityIndicator.backgroundColor = UIColor.white
         self.activityIndicator.color = UIColor.black
         self.activityIndicator.hidesWhenStopped = true
         self.activityIndicator.startAnimating()
     }
     
-    
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         

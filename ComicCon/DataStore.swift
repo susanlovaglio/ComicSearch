@@ -36,13 +36,13 @@ class DataStore{
                     guard let name = each["name"] as? String else {break}
                     
                     guard let eachIcon = each["image"] as? [String : Any] else{
-                        let character = Character(name: name, image: nil)
+                        let character = Character(name: name, image: UIImage(named: "noimage"))
                         self.characters.append(character)
                         completion(true)
                         continue}
                     
                     guard let link = eachIcon["icon_url"] as? String else {
-                        let character = Character(name: name, image: nil)
+                        let character = Character(name: name, image: UIImage(named: "noimage"))
                         self.characters.append(character)
                         completion(true)
                         continue}
@@ -85,13 +85,13 @@ class DataStore{
                     guard let name = each["name"] as? String else {break}
                     
                     guard let eachIcon = each["image"] as? [String : Any] else {
-                        let character = Character(name: name, image: nil)
+                        let character = Character(name: name, image: UIImage(named: "noimage"))
                         self.characters.append(character)
                         completion(true)
                         continue}
                     
                     guard let link = eachIcon["icon_url"] as? String else {
-                        let character = Character(name: name, image: nil)
+                        let character = Character(name: name, image: UIImage(named: "noimage"))
                         self.characters.append(character)
                         completion(true)
                         continue}
@@ -124,13 +124,13 @@ class DataStore{
                     guard let name = each["name"] as? String else {break}
                     
                     guard let eachIcon = each["image"] as? [String : Any] else {
-                        let character = Character(name: name, image: nil)
+                        let character = Character(name: name, image: UIImage(named: "noimage"))
                         self.characters.append(character)
                         completion(true)
                         continue}
                     
                     guard let link = eachIcon["icon_url"] as? String else {
-                        let character = Character(name: name, image: nil)
+                        let character = Character(name: name, image: UIImage(named: "noimage"))
                         self.characters.append(character)
                         completion(true)
                         continue}
@@ -172,13 +172,13 @@ class DataStore{
                         guard let name = each["name"] as? String else {break}
                         
                         guard let eachIcon = each["image"] as? [String : Any] else {
-                            let character = Character(name: name, image: nil)
+                            let character = Character(name: name, image: UIImage(named: "noimage"))
                             self.characters.append(character)
                             completion(true)
                             continue}
                         
                         guard let link = eachIcon["icon_url"] as? String else {
-                            let character = Character(name: name, image: nil)
+                            let character = Character(name: name, image: UIImage(named: "noimage"))
                             self.characters.append(character)
                             completion(true)
                             continue}
