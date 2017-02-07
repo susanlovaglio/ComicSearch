@@ -15,16 +15,19 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     let store = DataStore.sharedInstance
     var imageView = UIImageView()
     var searchBar = UISearchBar()
-    var searchActive = false
+    //    var searchActive = false
     var activityIndicator: UIActivityIndicatorView!
+    let layout = UICollectionViewFlowLayout()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.addImage()
         self.addSearchBar()
+        
         self.setUpCollectionView()
         self.setUpActivityIndicator()
+        
         
         store.getCharacters { (success) in
             if success{
@@ -45,8 +48,7 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         let cell: CharacterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "comicCell", for: indexPath) as! CharacterCell
         
         cell.setCharacter(character: store.characters[indexPath.item])
-//        cell.backgroundColor = UIColor.green
-
+        
         return cell
     }
     
@@ -66,7 +68,7 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         imageView.heightAnchor.constraint(equalToConstant: self.view.frame.size.height * 0.25).isActive = true
     }
     
-    func addSearchBar(){
+    func addSearchBar() {
         
         searchBar.delegate = self
         
@@ -83,21 +85,14 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     func setUpCollectionView() {
-
-        let layout = UICollectionViewFlowLayout()
-        self.comicCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        
+        
+        self.comicCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: self.layout)
         self.view.addSubview(self.comicCollectionView)
-
-        
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.itemSize = CGSize(width: self.view.frame.width / 2, height: self.view.frame.height * 0.25)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-
         self.comicCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        
         self.comicCollectionView.delegate = self
         self.comicCollectionView.dataSource = self
+        
         self.comicCollectionView.backgroundColor = UIColor.clear
         
         self.comicCollectionView.register(CharacterCell.self, forCellWithReuseIdentifier: "comicCell")
@@ -106,7 +101,43 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         self.comicCollectionView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
         self.comicCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         self.comicCollectionView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 10.0, right: 0)
+        layout.itemSize = CGSize(width: self.view.frame.width / 2, height: self.view.frame.height / 4)
+        layout.minimumInteritemSpacing = 0.0
+//        layout.minimumLineSpacing = 0.30
+        
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+//        
+//        return CGSize(width: self.view.frame.width / 2, height: self.view.frame.height / 4)
+//    }
+  
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{
+//        
+//        return UIEdgeInsets(top: 0, left: 0, bottom: 0.0, right: 0)
+//    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat{
+     
+        return 0.0
+    }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat{
+//     
+//        return 0.0
+//    }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
+//        
+//        return CGSize(width: 0, height: 0)
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize{
+//     
+//        return CGSize(width: 0, height: 0)
+//    }
     
     func setUpActivityIndicator() {
         
@@ -118,22 +149,22 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         self.activityIndicator.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         self.activityIndicator.heightAnchor.constraint(equalToConstant: self.view.frame.height * 0.06).isActive = true
         self.activityIndicator.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.topAnchor).isActive = true
-
+        
         self.activityIndicator.backgroundColor = UIColor.white
         self.activityIndicator.color = UIColor.black
         self.activityIndicator.hidesWhenStopped = true
         self.activityIndicator.startAnimating()
     }
     
-
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        
-        return 1.0
-    }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        
+//        return 1.0
+//    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
+        
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
@@ -152,7 +183,7 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
                     }
                 }
             }else {
-
+                
                 let query = searchBar.text!
                 self.activityIndicator.startAnimating()
                 store.getAdditionalCharacters(with: query, with: { (success) in
@@ -178,7 +209,7 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         store.pageNumber = nil
         self.activityIndicator.startAnimating()
         store.getCharacters(with: searchText) { (success) in
-//            print(searchText, success)
+            //            print(searchText, success)
             OperationQueue.main.addOperation {
                 
                 self.comicCollectionView.reloadData()
@@ -192,7 +223,7 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         return true
     }
     
-
+    
     
     
     /*
