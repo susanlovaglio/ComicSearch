@@ -13,7 +13,7 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     var counter = 0
     var comicCollectionView: UICollectionView!
     let store = DataStore.sharedInstance
-    var imageView = UIImageView()
+    var topView: UIView!
     var searchBar = UISearchBar()
     //    var searchActive = false
     var activityIndicator: UIActivityIndicatorView!
@@ -24,7 +24,6 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         
         self.addImage()
         self.addSearchBar()
-        
         self.setUpCollectionView()
         self.setUpActivityIndicator()
         
@@ -54,18 +53,25 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     
     func addImage(){
         
+        topView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height * 0.25))
+        topView.backgroundColor = UIColor.white
+        view.addSubview(topView)
+        topView.translatesAutoresizingMaskIntoConstraints = false
+        topView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        topView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        topView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        topView.heightAnchor.constraint(equalToConstant: self.view.frame.size.height * 0.25).isActive = true
         
         let image =  UIImage(named: "powPic")
-        imageView = UIImageView(image: image)
+        let imageView = UIImageView(image: image)
         imageView.contentMode = UIViewContentMode.scaleAspectFit
-        self.view.addSubview(imageView)
-        
-        imageView.backgroundColor = UIColor.white
+        self.topView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        imageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: self.view.frame.size.height * 0.25).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: topView.centerXAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: topView.centerYAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: self.topView.frame.size.height * 0.80).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: self.topView.frame.size.width * 0.80).isActive = true
+        
     }
     
     func addSearchBar() {
@@ -76,7 +82,7 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         
-        searchBar.topAnchor.constraint(equalTo: self.imageView.bottomAnchor).isActive = true
+        searchBar.topAnchor.constraint(equalTo: self.topView.bottomAnchor).isActive = true
         searchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         searchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         searchBar.heightAnchor.constraint(equalToConstant: self.view.frame.size.height * 0.06).isActive = true
@@ -105,41 +111,14 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 10.0, right: 0)
         layout.itemSize = CGSize(width: self.view.frame.width / 2, height: self.view.frame.height / 4)
         layout.minimumInteritemSpacing = 0.0
-//        layout.minimumLineSpacing = 0.30
-        
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-//        
-//        return CGSize(width: self.view.frame.width / 2, height: self.view.frame.height / 4)
-//    }
-  
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{
-//        
-//        return UIEdgeInsets(top: 0, left: 0, bottom: 0.0, right: 0)
-//    }
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat{
      
         return 0.0
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat{
-//     
-//        return 0.0
-//    }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
-//        
-//        return CGSize(width: 0, height: 0)
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize{
-//     
-//        return CGSize(width: 0, height: 0)
-//    }
-    
-    
     
     func setUpActivityIndicator() {
         
@@ -157,13 +136,6 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         self.activityIndicator.hidesWhenStopped = true
         self.activityIndicator.startAnimating()
     }
-    
-    
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        
-//        return 1.0
-//    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
