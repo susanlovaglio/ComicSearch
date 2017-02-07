@@ -139,6 +139,8 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
 //        return CGSize(width: 0, height: 0)
 //    }
     
+    
+    
     func setUpActivityIndicator() {
         
         self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
