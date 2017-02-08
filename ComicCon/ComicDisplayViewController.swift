@@ -193,14 +193,9 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         self.comicCollectionView.reloadData()
         store.pageNumber = nil
         self.activityIndicator.startAnimating()
-        store.characters.removeAll()
+        
         store.getCharacters(with: searchText) { (success) in
 
-//            print("********** begin \(#function)***************** \n")
-//            for each in self.store.characters{
-//                print("\(each.name)")
-//            }
-//            print("*********** end \(#function)**************** \n")
             OperationQueue.main.addOperation {
                 
                 self.comicCollectionView.reloadData()
