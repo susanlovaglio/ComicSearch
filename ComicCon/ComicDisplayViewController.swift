@@ -9,7 +9,7 @@
 
 import UIKit
 
-class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
+class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UpdateColectionView {
     
     var counter = 0
     var comicCollectionView: UICollectionView!
@@ -22,7 +22,7 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         self.addImage()
         self.addSearchBar()
         self.setUpCollectionView()
@@ -39,6 +39,13 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         }
     }
     
+    func updateCollectionView() {
+        
+        OperationQueue.main.addOperation( {
+            self.comicCollectionView.reloadData()
+        })
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return store.characters.count
     }
@@ -47,7 +54,11 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         
         let cell: CharacterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "comicCell", for: indexPath) as! CharacterCell
         
-        cell.setCharacter(character: store.characters[indexPath.item])
+        let character = store.characters[indexPath.item]
+        character.delegate = self
+        cell.character = character
+        cell.characterImageView.image = character.image
+        cell.characterNameLabel.text = character.name
         
         return cell
     }
@@ -179,12 +190,17 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        store.characters.removeAll()
         self.comicCollectionView.reloadData()
         store.pageNumber = nil
         self.activityIndicator.startAnimating()
+        store.characters.removeAll()
         store.getCharacters(with: searchText) { (success) in
-            //            print(searchText, success)
+
+//            print("********** begin \(#function)***************** \n")
+//            for each in self.store.characters{
+//                print("\(each.name)")
+//            }
+//            print("*********** end \(#function)**************** \n")
             OperationQueue.main.addOperation {
                 
                 self.comicCollectionView.reloadData()
@@ -197,6 +213,7 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
     
     
     

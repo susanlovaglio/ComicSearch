@@ -11,6 +11,8 @@ import UIKit
 
 class DataStore{
     
+    var counter = 0
+    
     static let sharedInstance = DataStore()
     var characters = [Character]()
     var fillingStore = false
@@ -47,12 +49,16 @@ class DataStore{
                         completion(true)
                         continue}
                     
-                    link.downloadedFromURLString(completion: { (image) in
-                        let character = Character(name: name, image: image)
-                        self.characters.append(character)
-                        completion(true)
-                        
-                    })
+                    let character = Character(name: name, imageUrlString: link)
+                    self.characters.append(character)
+                    completion(true)
+
+//                    link.downloadedFromURLString(completion: { (image) in
+//                        let character = Character(name: name, image: image)
+//                        self.characters.append(character)
+//                        completion(true)
+//
+//                    })
                 }
                 
                 if let page = self.pageNumber {
@@ -68,12 +74,15 @@ class DataStore{
     
     func getCharacters(with query: String, with completion: @escaping (Bool) -> ()) {
         
+//        counter = counter + 1
+//        print(counter)
+        
         self.characters.removeAll()
         let notFillingStore = fillingStore == false
         
         if notFillingStore {
             if let task = task{
-                print("old task in if \(task)")
+//                print("old task in if \(task)")
                 task.cancel()
             }
             self.characters.removeAll()
@@ -111,13 +120,13 @@ class DataStore{
                     self.fillingStore = false
                 }
             })
-            print("new task in if: \(query) \(task)")
+//            print("new task in if: \(query) \(task)")
             
         } else {
-            print("task cancelled: \(query) \(task)")
+//            print("task cancelled: \(query) \(task)")
             task!.cancel()
             pageNumber = nil
-            
+            characters.removeAll()
             task = ComicVineAPIClient.getCharacters(with: query, offset: self.offset, with: { (dictionaries) in
                 
                 for each in dictionaries {
@@ -150,7 +159,7 @@ class DataStore{
                     self.fillingStore = false
                 }
             })
-            print("new task in else: \(query) \(task)")
+//            print("new task in else: \(query) \(task)")
         
         }
     }
@@ -200,25 +209,5 @@ class DataStore{
                 })
             }
         }
-    }
-}
-
-extension String {
-    
-    func downloadedFromURLString(completion: @escaping (UIImage) -> Void){
-        
-        guard let url = URL(string: self) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard
-                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                let data = data, error == nil,
-                let result = UIImage(data: data)
-                else { return }
-            DispatchQueue.main.async() { () -> Void in
-                completion(result)
-            }
-            }.resume()
     }
 }

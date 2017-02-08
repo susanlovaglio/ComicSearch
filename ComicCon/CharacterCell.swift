@@ -4,7 +4,7 @@
 //
 //  Created by susan lovaglio on 12/22/16.
 //  Copyright © 2016 Flatiron School. All rights reserved.
-//
+
 
 import UIKit
 
@@ -13,9 +13,9 @@ class CharacterCell: UICollectionViewCell {
     var characterImageView: UIImageView!
     var characterNameLabel: UILabel!
     var character: Character!
-//    var borderView: UIView!
 
     override init(frame: CGRect) {
+        
         super.init(frame: frame)
         
         characterImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -40,24 +40,40 @@ class CharacterCell: UICollectionViewCell {
         self.layer.borderColor = UIColor.lightGray.cgColor
         self.layer.borderWidth = 0.50
         
-//        borderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-//        borderView.translatesAutoresizingMaskIntoConstraints = false
-//        self.addSubview(borderView)
-//        borderView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-//        borderView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-//        borderView.heightAnchor.constraint(equalToConstant: self.frame.size.height).isActive = true
-//        borderView.widthAnchor.constraint(equalToConstant: self.frame.size.width).isActive = true
-//        borderView.layer.borderColor = UIColor.green.cgColor
-//        borderView.layer.borderWidth = 1.0
-        
+//        setCharacter(character: self.character)
     }
     
-    func setCharacter(character: Character) {
+//    func setCharacter(character: Character) {
+//        print("*****************")
+//        print(character.name)
+//        print(character.image)
+//        print(character.imageUrlString)
+//        print("*****************")
+//
+//        self.character = character
+//        self.characterNameLabel.text = self.character.name
+//        self.characterImageView.image = self.character.image
+//
+//        if self.character.image == nil && self.character.imageUrlString != nil && self.character.gettingImages == false{
+//           print("about to get \(self.character.name)'s image")
+//            self.character.gettingImages = true
+//            self.character.imageUrlString!.downloadedFromURLString(completion: { (image) in
+//                print("coming back with \(self.character.name)'s image")
+//                self.character.image = image
+//                self.characterImageView.image = image
+//                self.character.gettingImages = false
+//
+//            })
+//            
+//        }
+    
+//        else {
+//            
+//            self.characterImageView.image = self.character.image
+//        }
         
-        self.character = character
-        self.characterImageView.image = self.character.image
-        self.characterNameLabel.text = self.character.name
-    }
+       
+//    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
