@@ -15,7 +15,16 @@ class DataStore{
     
     static let sharedInstance = DataStore()
     var characters = [Character]()
-    var fillingStore = false
+    var fillingStore: Bool = false {
+     
+        didSet{
+            
+            if fillingStore != oldValue{
+                //todo post notification or call protocol method
+            }
+        }
+    }
+    
     var task: URLSessionDataTask?
     var pageNumber:Int?
     var offset: Int {
@@ -89,8 +98,6 @@ class DataStore{
             fillingStore = true
             task = ComicVineAPIClient.getCharacters(with: query, offset: self.offset, with: { (dictionaries) in
                 
-                self.characters.removeAll()
-                
                 for each in dictionaries {
                     
                     guard let name = each["name"] as? String else {break}
@@ -130,8 +137,7 @@ class DataStore{
             pageNumber = nil
             characters.removeAll()
             task = ComicVineAPIClient.getCharacters(with: query, offset: self.offset, with: { (dictionaries) in
-                self.characters.removeAll()
-
+                
                 for each in dictionaries {
                     guard let name = each["name"] as? String else {break}
                     
@@ -214,3 +220,4 @@ class DataStore{
         }
     }
 }
+

@@ -16,7 +16,6 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     let store = DataStore.sharedInstance
     var topView: UIView!
     var searchBar = UISearchBar()
-    //    var searchActive = false
     var activityIndicator: UIActivityIndicatorView!
     let layout = UICollectionViewFlowLayout()
     
@@ -28,9 +27,10 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         self.setUpCollectionView()
         self.setUpActivityIndicator()
         
-        
+        self.store.characters.removeAll()
         store.getCharacters { (success) in
-            if success{
+            if success {
+                
                 OperationQueue.main.addOperation( {
                     self.comicCollectionView.reloadData()
                     self.activityIndicator.stopAnimating()
@@ -123,9 +123,15 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 10.0, right: 0)
         layout.itemSize = CGSize(width: self.view.frame.width / 2, height: self.view.frame.height / 4)
         layout.minimumInteritemSpacing = 0.0
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ComicDisplayViewController.keyBoardDismiss))
+        self.comicCollectionView.addGestureRecognizer(tapGesture)
     }
     
-
+    func keyBoardDismiss(){
+        
+        searchBar.endEditing(true)
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat{
      
@@ -149,8 +155,28 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         self.activityIndicator.startAnimating()
     }
     
+//    func handleScrollDuringLoad(){
+//    
+//        let scrollSize = CGSize(width: view.frame.size.height, height: 1.0)
+//        comicCollectionView.contentSize = scrollSize
+//    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
+        searchBar.endEditing(true)
+
+        
+        if store.fillingStore{
+            
+            comicCollectionView.isScrollEnabled = false
+            return
+            
+        }else {
+            
+            comicCollectionView.isScrollEnabled = true
+        }
+        
+
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
@@ -190,18 +216,33 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        self.comicCollectionView.reloadData()
         store.pageNumber = nil
         self.activityIndicator.startAnimating()
         
-        store.getCharacters(with: searchText) { (success) in
-
-            OperationQueue.main.addOperation {
+        if searchText.characters.count == 0{
+            self.store.characters.removeAll()
+            store.getCharacters(with: { (success) in
                 
-                self.comicCollectionView.reloadData()
-                self.activityIndicator.stopAnimating()
+                OperationQueue.main.addOperation {
+                    
+                    self.comicCollectionView.reloadData()
+                    self.activityIndicator.stopAnimating()
+                }
+            })
+         
+        } else {
+            
+            store.getCharacters(with: searchText) { (success) in
+                
+                OperationQueue.main.addOperation {
+                    
+                    self.comicCollectionView.reloadData()
+                    self.activityIndicator.stopAnimating()
+                }
             }
         }
+        
+   
         
     }
     
