@@ -9,7 +9,7 @@
 
 import UIKit
 
-class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UpdateColectionView {
+class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UpdateColectionView, HandleScrolling {
     
     var counter = 0
     var comicCollectionView: UICollectionView!
@@ -26,7 +26,7 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         self.addSearchBar()
         self.setUpCollectionView()
         self.setUpActivityIndicator()
-        
+        store.scrollDelegate = self
         self.store.characters.removeAll()
         store.getCharacters { (success) in
             if success {
@@ -37,6 +37,18 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
                 })
             }
         }
+    }
+    
+    func handleScrolling() {
+        
+        if store.fillingStore{
+            
+            comicCollectionView.isScrollEnabled = false
+        } else {
+            
+            comicCollectionView.isScrollEnabled = true
+        }
+        
     }
     
     func updateCollectionView() {
@@ -53,7 +65,7 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell: CharacterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "comicCell", for: indexPath) as! CharacterCell
-        
+        print("filling the store: \(store.fillingStore) scroll is: \(comicCollectionView.isScrollEnabled)")
         let character = store.characters[indexPath.item]
         character.delegate = self
         cell.character = character
@@ -166,15 +178,15 @@ class ComicDisplayViewController: UIViewController, UICollectionViewDelegate, UI
         searchBar.endEditing(true)
 
         
-        if store.fillingStore{
-            
-            comicCollectionView.isScrollEnabled = false
-            return
-            
-        }else {
-            
-            comicCollectionView.isScrollEnabled = true
-        }
+//        if store.fillingStore{
+//            
+//            comicCollectionView.isScrollEnabled = false
+//            return
+//            
+//        }else {
+//            
+//            comicCollectionView.isScrollEnabled = true
+//        }
         
 
         let offsetY = scrollView.contentOffset.y

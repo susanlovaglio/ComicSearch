@@ -12,16 +12,17 @@ import UIKit
 class DataStore{
     
     var counter = 0
-    
+    var scrollDelegate: HandleScrolling?
     static let sharedInstance = DataStore()
     var characters = [Character]()
     var fillingStore: Bool = false {
      
-        didSet{
+        willSet {
             
-            if fillingStore != oldValue{
+//            if fillingStore{
                 //todo post notification or call protocol method
-            }
+                scrollDelegate?.handleScrolling()
+            
         }
     }
     
@@ -221,3 +222,8 @@ class DataStore{
     }
 }
 
+protocol HandleScrolling {
+    
+    func handleScrolling()
+    
+}
